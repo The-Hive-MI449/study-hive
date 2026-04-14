@@ -122,11 +122,26 @@
     font-weight: bold;
     color: var(--accent);
     margin: 20px 0;
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.3s;
+
+    &.study {
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 2px solid var(--accent);
+    }
+
+    &.break {
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid #10b981;
+    }
   }
 
   p {
     font-size: 18px;
     margin-top: 10px;
+    font-weight: 500;
   }
 }
 
@@ -147,9 +162,14 @@
     font-weight: 500;
     transition: all 0.3s;
 
-    &:hover {
+    &:hover:not(:disabled) {
       opacity: 0.9;
       transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     &:focus-visible {

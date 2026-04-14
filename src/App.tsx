@@ -7,7 +7,7 @@ import './App.css'
 type Page = 'timer' | 'assignments' | 'music'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('timer')
+  const [currentPage, setCurrentPage] = useState<Page>('assignments')
 
   const renderPage = () => {
     switch (currentPage) {
