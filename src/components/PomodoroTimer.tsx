@@ -9,7 +9,7 @@ export function PomodoroTimer() {
   const [isBreak, setIsBreak] = useState(false)
 
   useEffect(() => {
-    let interval: NodeJS.Timeout
+    let interval: ReturnType<typeof setInterval>
 
     if (isRunning && timeLeft > 0) {
       interval = setInterval(() => {
