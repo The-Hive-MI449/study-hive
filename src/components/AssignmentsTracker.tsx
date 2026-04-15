@@ -21,7 +21,6 @@ export function AssignmentsTracker() {
             const { data, error } = await supabase
                 .from('AssignmentTracker')
                 .select('*');
-            console.log('data:', data, 'error:', error);
             if (!error) setAssignments(data || []);
             setLoading(false);
         }
