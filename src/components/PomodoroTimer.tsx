@@ -1,3 +1,5 @@
+import BeeSVG from '../assets/beeSVG'
+
 interface PomodoroTimerProps {
   timeLeft: number
   isRunning: boolean
@@ -34,21 +36,37 @@ export function PomodoroTimer({
       </section>
 
       <section className="timer-display">
-        <div className={`timer ${isBreak ? 'break' : 'study'}`}>
-          {formatTime(timeLeft)}
+        <div className="timer-hexagon-wrapper">
+          <div className="timer-main-hex">
+            <div className="timer-main-hex-inner">
+              <div className="timer">{formatTime(timeLeft)}</div>
+              <div className="timer-status">{isBreak ? 'Break Time!' : 'Let\'s Get Studying!'}</div>
+            </div>
+          </div>
+
+          <div className="timer-controls-hex">
+            <div className="control-hex">
+              <div className="control-hex-inner">
+                <button onClick={onReset} title="Reset timer">
+                  <span style={{ fontSize: '20px', marginBottom: '5px' }}>↺</span>
+                  <span>Reset</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <p>{isBreak ? 'Break Time!' : 'Let\'s Get Studying!'}</p>
       </section>
 
-      <section className="timer-controls">
-        <button onClick={onStart} disabled={isRunning}>
-          Start
+      <div className="bee-control">
+        <button 
+          onClick={isRunning ? onPause : onStart}
+          title={isRunning ? 'Pause timer' : 'Start timer'}
+        >
+          <BeeSVG />
         </button>
-        <button onClick={onPause} disabled={!isRunning}>
-          Pause
-        </button>
-        <button onClick={onReset}>Reset</button>
-      </section>
+        <span className="bee-label">{isRunning ? 'Pause' : 'Start'}</span>
+      </div>
     </div>
   );
 }
