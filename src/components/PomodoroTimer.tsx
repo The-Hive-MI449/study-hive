@@ -1,33 +1,22 @@
-import { useState, useEffect } from 'react'
+import BeeSVG from '../assets/beeSVG'
 
-const STUDY_TIME = 25 * 60 // 25 minutes in seconds
-const BREAK_TIME = 5 * 60 // 5 minutes in seconds
+interface PomodoroTimerProps {
+  timeLeft: number
+  isRunning: boolean
+  isBreak: boolean
+  onStart: () => void
+  onPause: () => void
+  onReset: () => void
+}
 
-export function PomodoroTimer() {
-  const [timeLeft, setTimeLeft] = useState(STUDY_TIME)
-  const [isRunning, setIsRunning] = useState(false)
-  const [isBreak, setIsBreak] = useState(false)
-
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>
-
-    if (isRunning && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev <= 1) {
-            // Switch between study and break
-            setIsBreak(!isBreak)
-            return isBreak ? STUDY_TIME : BREAK_TIME
-          }
-          return prev - 1
-        })
-      }, 1000)
-    } else if (timeLeft === 0) {
-      setIsRunning(false)
-    }
-
-    return () => clearInterval(interval)
-  }, [isRunning, timeLeft, isBreak])
+export function PomodoroTimer({
+  timeLeft,
+  isRunning,
+  isBreak,
+  onStart,
+  onPause,
+  onReset,
+}: PomodoroTimerProps) {
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -35,13 +24,7 @@ export function PomodoroTimer() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
-  const handleStart = () => setIsRunning(true)
-  const handlePause = () => setIsRunning(false)
-  const handleReset = () => {
-    setIsRunning(false)
-    setIsBreak(false)
-    setTimeLeft(STUDY_TIME)
-  }
+
 
   return (
     <div className="pomodoro-container">
@@ -53,21 +36,37 @@ export function PomodoroTimer() {
       </section>
 
       <section className="timer-display">
-        <div className={`timer ${isBreak ? 'break' : 'study'}`}>
-          {formatTime(timeLeft)}
+        <div className="timer-hexagon-wrapper">
+          <div className="timer-main-hex">
+            <div className="timer-main-hex-inner">
+              <div className="timer">{formatTime(timeLeft)}</div>
+              <div className="timer-status">{isBreak ? 'Break Time!' : 'Let\'s Get Studying!'}</div>
+            </div>
+          </div>
+
+          <div className="timer-controls-hex">
+            <div className="control-hex">
+              <div className="control-hex-inner">
+                <button onClick={onReset} title="Reset timer">
+                  <span style={{ fontSize: '20px', marginBottom: '5px' }}>↺</span>
+                  <span>Reset</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <p>{isBreak ? 'Break Time!' : 'Let\'s Get Studying!'}</p>
       </section>
 
-      <section className="timer-controls">
-        <button onClick={handleStart} disabled={isRunning}>
-          Start
+      <div className="bee-control">
+        <button 
+          onClick={isRunning ? onPause : onStart}
+          title={isRunning ? 'Pause timer' : 'Start timer'}
+        >
+          <BeeSVG />
         </button>
-        <button onClick={handlePause} disabled={!isRunning}>
-          Pause
-        </button>
-        <button onClick={handleReset}>Reset</button>
-      </section>
+        <span className="bee-label">{isRunning ? 'Pause' : 'Start'}</span>
+      </div>
     </div>
   );
 }
