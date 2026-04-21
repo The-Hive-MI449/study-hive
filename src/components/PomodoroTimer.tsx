@@ -1,33 +1,20 @@
-import { useState, useEffect } from 'react'
+interface PomodoroTimerProps {
+  timeLeft: number
+  isRunning: boolean
+  isBreak: boolean
+  onStart: () => void
+  onPause: () => void
+  onReset: () => void
+}
 
-const STUDY_TIME = 25 * 60 // 25 minutes in seconds
-const BREAK_TIME = 5 * 60 // 5 minutes in seconds
-
-export function PomodoroTimer() {
-  const [timeLeft, setTimeLeft] = useState(STUDY_TIME)
-  const [isRunning, setIsRunning] = useState(false)
-  const [isBreak, setIsBreak] = useState(false)
-
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>
-
-    if (isRunning && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev <= 1) {
-            // Switch between study and break
-            setIsBreak(!isBreak)
-            return isBreak ? STUDY_TIME : BREAK_TIME
-          }
-          return prev - 1
-        })
-      }, 1000)
-    } else if (timeLeft === 0) {
-      setIsRunning(false)
-    }
-
-    return () => clearInterval(interval)
-  }, [isRunning, timeLeft, isBreak])
+export function PomodoroTimer({
+  timeLeft,
+  isRunning,
+  isBreak,
+  onStart,
+  onPause,
+  onReset,
+}: PomodoroTimerProps) {
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -35,13 +22,7 @@ export function PomodoroTimer() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
-  const handleStart = () => setIsRunning(true)
-  const handlePause = () => setIsRunning(false)
-  const handleReset = () => {
-    setIsRunning(false)
-    setIsBreak(false)
-    setTimeLeft(STUDY_TIME)
-  }
+
 
   return (
     <div className="pomodoro-container">
@@ -60,13 +41,13 @@ export function PomodoroTimer() {
       </section>
 
       <section className="timer-controls">
-        <button onClick={handleStart} disabled={isRunning}>
+        <button onClick={onStart} disabled={isRunning}>
           Start
         </button>
-        <button onClick={handlePause} disabled={!isRunning}>
+        <button onClick={onPause} disabled={!isRunning}>
           Pause
         </button>
-        <button onClick={handleReset}>Reset</button>
+        <button onClick={onReset}>Reset</button>
       </section>
     </div>
   );
