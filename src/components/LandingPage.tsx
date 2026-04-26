@@ -1,10 +1,15 @@
 import React from 'react'
+import BeeSVG from '../assets/beeSVG'
 
 type NavTarget = 'timer' | 'assignments' | 'music'
 
 export function LandingPage({ onNavigate }: { onNavigate: (p: NavTarget) => void }) {
   return (
     <section className="landing">
+      <div className="landing-bee landing-bee-left" aria-hidden>
+        <BeeSVG />
+      </div>
+
       <div className="hex-grid hex-cluster">
         <button className="hex-link hex-top" onClick={() => onNavigate('timer')} aria-label="Go to Pomodoro Timer">
           <div className="hex-outer">
@@ -26,6 +31,10 @@ export function LandingPage({ onNavigate }: { onNavigate: (p: NavTarget) => void
           </div>
           <span className="hex-label kdam-thmor-pro-regular">Assignments<br />Tracker</span>
         </button>
+      </div>
+
+      <div className="landing-bee landing-bee-right" aria-hidden>
+        <BeeSVG />
       </div>
     </section>
   )

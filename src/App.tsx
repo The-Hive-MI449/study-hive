@@ -95,7 +95,7 @@ function App() {
         />
         {currentPage === 'landing' && (
           <>
-            <h1 className="site-title kdam-thmor-pro-regular">Study Hive</h1>
+            <h1>Study Hive</h1>
             <p className="site-tagline work-sans">for the especially busy bee</p>
           </>
         )}
