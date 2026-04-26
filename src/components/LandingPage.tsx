@@ -1,4 +1,4 @@
-import React from 'react'
+// React import not required with the new JSX transform
 import BeeSVG from '../assets/beeSVG'
 
 type NavTarget = 'timer' | 'assignments' | 'music'
