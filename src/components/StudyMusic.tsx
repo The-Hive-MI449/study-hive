@@ -10,7 +10,7 @@ export function StudyMusic() {
     window.onSpotifyIframeApiReady = (IFrameAPI: any) => {
       const element = document.getElementById('embed-iframe');
       const options = {
-        uri: 'spotify:playlist:37i9dQZF1DX8NTLI2TtZa6',
+        uri: 'https://open.spotify.com/playlist/6zCID88oNjNv9zx6puDHKj?si=eJJjK8AcT1e15CU3jwF_Eg',
         width: '100%',
         height: 480
       };
