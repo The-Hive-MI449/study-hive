@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import logo from './assets/logo.png'
 import { PomodoroTimer } from './components/PomodoroTimer'
 import { AssignmentsTracker } from './components/AssignmentsTracker'
 import { StudyMusic } from './components/StudyMusic'
@@ -85,7 +86,7 @@ function App() {
     <>
       <header className="site-header">
         <img
-          src="/src/assets/logo.png"
+          src={logo}
           alt="Study Hive logo"
           className="site-logo"
           onClick={() => setCurrentPage('landing')}
@@ -95,7 +96,7 @@ function App() {
         />
         {currentPage === 'landing' && (
           <>
-            <h1 className="site-title kdam-thmor-pro-regular">Study Hive</h1>
+            <h1>Study Hive</h1>
             <p className="site-tagline work-sans">for the especially busy bee</p>
           </>
         )}

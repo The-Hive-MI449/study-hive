@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
 
+declare global {
+  interface Window {
+    onSpotifyIframeApiReady?: (IFrameAPI: any) => void;
+  }
+}
+
 export function StudyMusic() {
   useEffect(() => {
     const loadSpotifyPlayer = () => {

@@ -52,7 +52,32 @@ h3, p {
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  padding: 40px 0;
+}
+
+/* Make landing a positioning context for decorative bees */
+.landing {
+  position: relative;
+}
+
+.landing-bee {
+  position: absolute;
+  width: 96px;
+  height: auto;
+  color: var(--black);
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.landing-bee-left {
+  left: 0%;
+  top: 18%;
+  transform: rotate(-14deg);
+}
+
+.landing-bee-right {
+  right: 7%;
+  bottom: 5%;
+  transform: scaleX(-1) rotate(12deg);
 }
 
 .hex-grid {
@@ -276,7 +301,6 @@ h3, p {
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
   min-height: calc(100vh - 120px);
 
   @media (max-width: 768px) {
@@ -288,7 +312,7 @@ h3, p {
 .assignments-container,
 .study-music-container {
   h1 {
-    margin-top: 0;
+    margin-top: 20px;
     color: var(--text-h);
   }
 
