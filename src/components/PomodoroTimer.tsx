@@ -48,7 +48,7 @@ export function PomodoroTimer({
             <div className="control-hex">
               <div className="control-hex-inner">
                 <button onClick={onReset} title="Reset timer">
-                  <span style={{ fontSize: '20px', marginBottom: '5px' }}>↺</span>
+                  <span style={{ fontSize: '30px', marginBottom: '5px' }}>↺</span>
                   <span>Reset</span>
                 </button>
               </div>
