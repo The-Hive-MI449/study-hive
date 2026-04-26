@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import logo from './assets/logo.png'
 import { PomodoroTimer } from './components/PomodoroTimer'
 import { AssignmentsTracker } from './components/AssignmentsTracker'
 import { StudyMusic } from './components/StudyMusic'
@@ -85,7 +86,7 @@ function App() {
     <>
       <header className="site-header">
         <img
-          src="/src/assets/logo.png"
+          src={logo}
           alt="Study Hive logo"
           className="site-logo"
           onClick={() => setCurrentPage('landing')}
